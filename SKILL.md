@@ -13,9 +13,10 @@ Use this skill when the user wants a reusable knowledge-base method, not just on
 2. Define the boundary from the harvested set: `in scope`, `near scope`, `out of scope`.
 3. Decide `2-6` research tracks based on how the user will read, compare, or write about the field.
 4. Run `scripts/scaffold_research_kb.py` to create the layered vault skeleton.
-5. Use `references/templates.md` when writing or rewriting canonical note pages.
-6. Run `scripts/extract_paper_key_regions.py` when a mature note needs a method figure or a main results table crop.
-7. Keep the main index, track pages, pending queue, browser view, and audit page in sync as the vault grows.
+5. Download reachable PDFs into the pending bucket before promoting papers into canonical notes.
+6. Use `references/templates.md` when writing or rewriting canonical note pages.
+7. Run `scripts/extract_paper_key_regions.py` when a mature note needs a method figure or a main results table crop.
+8. Keep the main index, track pages, pending queue, browser view, and audit page in sync as the vault grows.
 
 ## What This Pattern Preserves
 
@@ -46,7 +47,7 @@ Use `scripts/harvest_topic_papers.py` to:
 - merge duplicates by DOI or normalized title
 - compare hits against the current vault
 - classify candidates into `core`, `bridge`, `low-confidence`, and `existing`
-- optionally download directly reachable PDFs into the pending bucket
+- download directly reachable PDFs into the pending bucket by default when a vault is provided
 - generate a JSON manifest plus a Markdown report
 
 Example:
@@ -59,14 +60,14 @@ python /path/to/harvest_topic_papers.py \
   --query "class imbalance recognition" \
   --exclude-keyword "facial expression" \
   --vault "/path/to/vault" \
-  --prefix "ltvr" \
-  --download-pdfs
+  --prefix "ltvr"
 ```
 
 Default rules:
 
 - use `2-6` seed queries, not one huge query blob
 - prefer broad-but-legible queries over venue names
+- when `--vault` is provided, treat PDF download as part of the default intake path; use `--skip-pdf-download` only when the user explicitly wants metadata-only harvest
 - review the generated `core` and `bridge` blocks before promoting anything into canonical notes
 - treat `low-confidence` results as triage material, not as final exclusions
 - never claim the harvest is literally complete; it is a repeatable coverage pass
@@ -199,6 +200,7 @@ Do not rely on memory for cleanup. The audit page is part of the method.
 - When converting an existing flat collection, harvest and de-duplicate first, normalize a representative batch second, rebuild the main index third, then sweep the rest.
 - When a page is mostly placeholder prose, log it in the audit page instead of pretending it is finished.
 - When the user asks to start a new field from the web, run the harvest step before asking for local PDFs.
+- Do not write canonical notes from harvest-only metadata when a reachable PDF could have been downloaded first.
 
 ## Read These References Only When Needed
 

@@ -24,7 +24,7 @@ It currently:
 - scores each candidate against the supplied seed queries
 - applies optional include / exclude keywords
 - checks whether the paper already exists in the target vault
-- optionally downloads directly reachable PDFs into a pending bucket
+- downloads directly reachable PDFs into a pending bucket by default when `--vault` or `--pdf-dir` is provided
 - writes a JSON manifest and a Markdown report
 - updates the managed auto-harvest block in the pending page when `--vault` and `--prefix` point at an existing scaffolded KB
 
@@ -55,7 +55,9 @@ python /path/to/harvest_topic_papers.py \
   --query "class imbalance recognition" \
   --include-keyword "long-tailed" \
   --include-keyword "class imbalance" \
-  --exclude-keyword "facial expression"
+  --exclude-keyword "facial expression" \
+  --vault "/path/to/vault" \
+  --prefix "ltvr"
 ```
 
 ## Output Files
@@ -70,7 +72,7 @@ If the vault is scaffolded, prefer storing them in:
 - `assets/paper_search/manifests`
 - `assets/paper_search/reports`
 
-If `--download-pdfs` is enabled, prefer:
+If PDF download is enabled, prefer:
 
 - `assets/paper_pdfs/待处理`
 
@@ -90,10 +92,10 @@ The first pass should optimize for recall plus intelligible triage, not for pret
 ## Recommended Loop
 
 1. Harvest from the web with `2-6` seed queries.
-2. Review `core` and `bridge` candidates.
-3. Refine the field boundary and track list.
-4. Scaffold the KB if needed.
-5. Download PDFs or keep official URLs in the pending queue.
+2. Download reachable PDFs into the pending queue.
+3. Review `core` and `bridge` candidates.
+4. Refine the field boundary and track list.
+5. Scaffold the KB if needed.
 6. Promote only the important papers into canonical notes.
 7. Re-run harvest after boundary or query changes.
 
@@ -102,4 +104,5 @@ The first pass should optimize for recall plus intelligible triage, not for pret
 - The harvester is a repeatable coverage pass, not a guarantee of literal completeness.
 - Publisher pages and metadata services disagree on titles, years, and PDF accessibility; manual review still matters.
 - Some sources expose metadata but not a downloadable PDF.
+- Use `--skip-pdf-download` only when metadata-only harvest is intentional.
 - Domain-specific sources can be added later when the field needs them.

@@ -123,7 +123,16 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     parser.add_argument("--vault", help="Optional vault root for duplicate checking and managed pending import.")
     parser.add_argument("--prefix", help="KB prefix used to locate <prefix>-待处理清单.md inside the vault.")
     parser.add_argument("--out-dir", help="Directory for the JSON manifest and Markdown report.")
-    parser.add_argument("--download-pdfs", action="store_true", help="Download reachable PDFs for core/bridge items.")
+    parser.add_argument(
+        "--download-pdfs",
+        action="store_true",
+        help="Force PDF download even when no vault path is provided.",
+    )
+    parser.add_argument(
+        "--skip-pdf-download",
+        action="store_true",
+        help="Skip PDF download even when a vault or PDF directory is provided.",
+    )
     parser.add_argument("--pdf-dir", help="Directory for downloaded PDFs.")
     parser.add_argument("--max-downloads", type=int, default=12, help="Maximum PDFs to download in one run.")
     parser.add_argument(
@@ -591,8 +600,10 @@ def download_candidate_pdfs(
         key=lambda item: (item.classification != "core", -item.final_score, item.year or 0),
     )
     for candidate in ordered:
-        if downloads >= max_downloads or not candidate.pdf_url:
+        if downloads >= max_downloads:
             break
+        if not candidate.pdf_url:
+            continue
         target = pdf_dir / safe_file_name(candidate.title, candidate.year)
         if target.exists() and target.stat().st_size > 10_240:
             candidate.local_pdf = str(target)
@@ -814,8 +825,12 @@ def main(argv: list[str]) -> int:
     topic_slug = slugify(args.topic)
     manifest_path = manifest_dir / f"{topic_slug}-harvest-manifest.json"
     report_path = out_dir / f"{topic_slug}-harvest-report.md"
+    should_download_pdfs = False
+    if not args.skip_pdf_download:
+        should_download_pdfs = bool(args.download_pdfs or args.pdf_dir or vault)
+
     pdf_dir = None
-    if args.download_pdfs:
+    if should_download_pdfs:
         if args.pdf_dir:
             pdf_dir = Path(args.pdf_dir).expanduser().resolve()
         elif vault:
