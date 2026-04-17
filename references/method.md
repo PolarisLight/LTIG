@@ -105,6 +105,13 @@ Rules:
 
 ## Canonical Note Rules
 
+Do not use the canonical notes folder for shallow summaries.
+
+The important distinction is:
+
+- pending / triage material helps intake
+- canonical notes replace a first re-read
+
 Mature notes should keep a stable frontmatter and stable section order.
 
 The frontmatter should keep at least:
@@ -118,8 +125,21 @@ The frontmatter should keep at least:
 - `official_url`
 - `doi`
 - `tags`
+- `reading_status`
+- `evidence_level`
+- `one_sentence`
 
 The body should keep a stable order so later scripts, browser views, and human review stay cheap.
+
+A canonical note should answer, from the note alone:
+
+- what problem the paper is solving
+- what exact gap in prior work it targets
+- what the method changes in operational terms
+- what the training and inference flow look like
+- why the method is supposed to work
+- which evidence is strongest
+- where the method is weak or still unclear
 
 ## Attachments and State
 
@@ -153,8 +173,13 @@ Recommended long-term loop:
 Signals that a note is not mature yet:
 
 - background and motivation are still generic filler
+- the note never states in one sentence what the paper actually does
 - there is no real method breakdown
+- training and inference cannot be reconstructed from the note
+- the note cannot explain why the claimed gain should happen
 - there is no key figure or no core experimental takeaway
+- the results section lists datasets but not the main comparison conclusion
+- limitations and failure modes are missing
 - the note does not explain how it relates to the current KB storyline
 - the evidence boundary is not stated
 
@@ -163,3 +188,10 @@ A mature note should let the user decide within `30-60` seconds:
 - whether the paper is worth deeper reading
 - which track it belongs to
 - what evidence is still missing
+
+And within `2-3` minutes the user should be able to retell:
+
+- the problem setting
+- the core method path
+- the main gain over the closest baseline
+- the strongest supporting experiment

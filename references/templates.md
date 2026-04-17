@@ -19,11 +19,21 @@ subtype: <task subtype>
 category: <category>
 official_url: <url-or-N/A>
 doi: <doi-or-N/A>
+reading_status: full-read
+evidence_level: full-text
+one_sentence: "<this paper does X by Y for Z>"
 ---
 
 # <paper title>
 
 [[<prefix>-索引|返回总索引]]
+
+## 30秒结论
+
+- 一句话：<this paper does X by Y to solve Z>
+- 它和最接近方法的关键区别：<one sentence>
+- 它最强的证据：<one sentence>
+- 它最大的局限：<one sentence>
 
 ## 基本信息
 
@@ -40,37 +50,78 @@ doi: <doi-or-N/A>
 - 图片说明：<why this image matters>
 - 主要实验结果图表（可选）：![[assets/paper_figures/已入库/<paper>_table_main_1.png]]
 
-## 背景
+## 这篇论文到底在解决什么问题
+
+- 任务设置：<classification / generation / retrieval / ...>
+- 输入与输出：<what goes in and what comes out>
+- 监督 / 训练信号：<labels / pairs / pseudo-labels / reward / none>
+- 目标约束：<long-tail / missing modality / open-world / compute budget / ...>
+
+## 背景与问题定义
 
 <what broader problem this paper sits in>
 
-## 动机
+## 动机与 prior work 缺口
 
 <what exact gap the authors think prior work misses>
 
 ## 方法总览
 
-<compress the full method into one or two paragraphs>
+<用 4-8 句完整描述整条方法链，而不是一句口号。至少说清：输入是什么、先做什么、核心模块是什么、输出是什么、训练时优化什么。>
+
+## 整体流程
+
+### 训练阶段
+
+1. <step 1>
+2. <step 2>
+3. <step 3>
+
+### 推理阶段
+
+1. <step 1>
+2. <step 2>
+3. <step 3>
+
+## 方法总图解读
+
+- 图中左边 / 上半部分在做什么：<explain>
+- 图中核心模块在做什么：<explain>
+- 图中损失 / 约束在做什么：<explain>
+- 这张图为什么足以代表整篇方法：<explain>
+
+## 核心思想拆成大白话
+
+- 如果把整篇方法讲给组内同学听，我会怎么说：<plain-language explanation>
+- 它为什么可能有效：<mechanism, not slogan>
 
 ## 方法家族定位
 
 <which method family or route this belongs to>
 
-## 方法拆解
+## 关键模块拆解
 
 1. <step/module 1>
 2. <step/module 2>
 3. <step/module 3>
 
-## 关键增益点
+对每个模块尽量补三件事：
+
+- 它吃什么输入
+- 它产出什么中间结果
+- 它相对 baseline 多做了什么
+
+## 相对最接近 baseline 的真实改动
+
+- baseline 是什么：<closest baseline>
+- 它在 baseline 上加了 / 改了什么：<exact change>
+- 哪些看起来新，但本质只是实现细节：<separate novelty from packaging>
+
+## 关键增益点与作用机制
 
 - <gain 1>
 - <gain 2>
-
-## 与经典方法的区别
-
-- <difference 1>
-- <difference 2>
+- 每个 gain 对应解决哪个痛点：<map gains to problems>
 
 ## 核心公式
 
@@ -81,17 +132,40 @@ doi: <doi-or-N/A>
 - <reading hint 1>
 - <reading hint 2>
 
+## 实验设置
+
+- 数据集：<datasets>
+- 指标：<metrics>
+- 对比方法：<main baselines>
+- 最关键的 setting：<e.g. imbalance factor / missing ratio / shot split / compute budget>
+
 ## 实验与结果
 
-<main datasets, main metrics, strongest evidence>
+<不要只列数据集。明确写出“它比谁强、强在哪、强多少、大致在哪些设置下最明显”。>
 
 ### 主要实验结果图表（可选）
 
 ![[assets/paper_figures/已入库/<paper>_table_main_1.png]]
 
+## 最强证据是什么，为什么我相信它
+
+- 主结果：<one sentence>
+- 最能支撑 claim 的实验：<one sentence>
+- 还不够充分的地方：<one sentence>
+
+## 失败点、代价与局限
+
+- 失败场景 / 不稳定点：<failure modes>
+- 额外代价：<compute / memory / annotation / tuning>
+- 作者没讲清但你需要警惕的点：<your judgment>
+
 ## 结论
 
 <what the paper is worth remembering for>
+
+## 我会怎么向别人复述这篇论文
+
+<2-4 句话，把它讲成口头报告版，而不是摘抄版。>
 
 ## 与当前项目的相关性
 
@@ -99,8 +173,9 @@ doi: <doi-or-N/A>
 
 ## 证据边界与后续补强
 
-- <what was verified from full text>
-- <what still needs deeper reading>
+- 已从全文确认：<what was verified from full text>
+- 仍需复核：<what still needs deeper reading>
+- 当前笔记属于：<triage / partial / mature>
 ```
 
 ## Track Page Template
@@ -145,6 +220,11 @@ tags:
 
 - 所有占位文字都被替换掉
 - 作者、来源、层级、任务子类都已填写
+- `30秒结论` 不是空的，且不是换皮摘要
+- 看这篇笔记的人不打开 PDF 也能说清：问题、方法、训练 / 推理流程、最强结果、最大局限
+- `一篇论文到底做了什么` 用自己的话写清了，不是贴作者原句
+- `相对最接近 baseline 的真实改动` 写清了，不把包装当创新
+- `实验与结果` 写了结论，不只是罗列数据集和指标
 - PDF 和关键图至少补齐其一，最好两者都有
 - 如果保留了结果表截图，裁剪区域不能接近整页；接近整页时改用手工 bbox 重做
 - 章节顺序保持稳定，不要随意改名

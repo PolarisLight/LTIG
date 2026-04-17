@@ -108,9 +108,16 @@ python /path/to/scaffold_research_kb.py \
 
 Use the script by default for new knowledge bases. Hand-build the files only when the vault already exists and needs a careful merge.
 
-### 5. Normalize note structure
+### 5. Normalize note structure at two depths
 
-Use the same canonical section order for mature paper notes. The stable skeleton lives in `references/templates.md`.
+Do not treat every note as if it has the same maturity.
+
+Use two levels on purpose:
+
+- `triage / pending`: enough to remember why the paper is in the queue
+- `canonical / mature`: deep enough that the user can understand what the paper actually does without reopening the PDF
+
+The stable skeleton lives in `references/templates.md`.
 
 Keep the frontmatter machine-readable. The browser view and any future automation assume fields such as:
 
@@ -123,6 +130,13 @@ Keep the frontmatter machine-readable. The browser view and any future automatio
 - `official_url`
 - `doi`
 - `tags`
+- `reading_status`
+- `evidence_level`
+- `one_sentence`
+
+Default rule:
+
+- do not move a paper into the canonical notes folder unless the note already answers the core questions: `what problem`, `why prior work is insufficient`, `what the method actually changes`, `how training / inference works`, `what evidence is strongest`, and `what the real limitation is`
 
 ### 6. Extract key method and results visuals
 
@@ -184,6 +198,7 @@ The main index is for judgment. The browser is for search and re-slicing.
 Use the audit page to track:
 
 - obviously templated notes
+- notes missing a method explanation that a human can retell
 - notes missing figures or core results
 - metadata anomalies
 - notes that still need a full rewrite
@@ -196,11 +211,13 @@ Do not rely on memory for cleanup. The audit page is part of the method.
 - Prefer track pages with `核心主线`, `桥接 / 强相关`, and `待补条目` sections over unstructured reading dumps.
 - Preserve an explicit `evidence boundary and next verification` section in mature notes so later sessions know what is solid and what still needs full-text verification.
 - Use tags to capture both task track and method family; this makes the browser useful later.
+- Do not confuse a triage note with a mature note. Pending notes can stay light; canonical notes cannot.
 - Do not accept near-full-page PDF renders as final key visuals. If the crop is not tight, mark it low confidence and redo it.
 - When converting an existing flat collection, harvest and de-duplicate first, normalize a representative batch second, rebuild the main index third, then sweep the rest.
 - When a page is mostly placeholder prose, log it in the audit page instead of pretending it is finished.
 - When the user asks to start a new field from the web, run the harvest step before asking for local PDFs.
 - Do not write canonical notes from harvest-only metadata when a reachable PDF could have been downloaded first.
+- A mature note should let the user explain the paper to another person in `2-3` minutes without reopening the PDF.
 
 ## Read These References Only When Needed
 
