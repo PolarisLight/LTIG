@@ -180,6 +180,12 @@ one_sentence: "<this paper does X by Y for Z>"
 - 已从全文确认：<what was verified from full text>
 - 仍需复核：<what still needs deeper reading>
 - 当前笔记属于：<triage / partial / mature>
+
+<!-- AUTO-FAMILY-LINKS:START -->
+## 库内同家族笔记
+
+- 由 `scripts/refresh_note_family_links.py` 自动维护
+<!-- AUTO-FAMILY-LINKS:END -->
 ```
 
 ## Triage Paper Note
@@ -238,6 +244,12 @@ one_sentence: "<paper title> | pending triage"
 - 方法主线：待补
 - 主结果：待补
 - 最大疑问：待补
+
+<!-- AUTO-FAMILY-LINKS:START -->
+## 库内同家族笔记
+
+- 待补方法 / 任务标签后自动生成
+<!-- AUTO-FAMILY-LINKS:END -->
 ```
 
 ## Track Page Template
@@ -288,6 +300,7 @@ tags:
 - `相对最接近 baseline 的真实改动` 写清了，不把包装当创新
 - `实验与结果` 写了结论，不只是罗列数据集和指标
 - `论文原文（内嵌 PDF）` 可以直接在笔记里打开，而不是只留外链
+- 笔记末尾有自动维护的 `库内同家族笔记` 区块，能把同方法 / 同任务的其他笔记串起来
 - PDF 和关键图至少补齐其一，最好两者都有
 - 如果保留了结果表截图，裁剪区域不能接近整页；接近整页时改用手工 bbox 重做
 - 章节顺序保持稳定，不要随意改名

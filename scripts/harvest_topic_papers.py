@@ -759,6 +759,12 @@ def build_triage_note(candidate: Candidate, prefix: str, vault: Path) -> str:
         "- 主结果：待补",
         "- 最大疑问：待补",
         "",
+        "<!-- AUTO-FAMILY-LINKS:START -->",
+        "## 库内同家族笔记",
+        "",
+        "- 待补方法 / 任务标签后自动生成。",
+        "<!-- AUTO-FAMILY-LINKS:END -->",
+        "",
     ]
     return "\n".join(lines).rstrip() + "\n"
 

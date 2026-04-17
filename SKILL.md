@@ -16,7 +16,8 @@ Use this skill when the user wants a reusable knowledge-base method, not just on
 5. Download reachable PDFs into the pending bucket before promoting papers into canonical notes.
 6. Use `references/templates.md` when writing or rewriting canonical note pages.
 7. Run `scripts/extract_paper_key_regions.py` when a mature note needs a method figure or a main results table crop.
-8. Keep the main index, track pages, pending queue, browser view, and audit page in sync as the vault grows.
+8. Run `scripts/refresh_note_family_links.py` so each paper note ends with same-family links to other notes in the KB.
+9. Keep the main index, track pages, pending queue, browser view, and audit page in sync as the vault grows.
 
 ## What This Pattern Preserves
 
@@ -139,6 +140,7 @@ Default rule:
 
 - do not move a paper into the canonical notes folder unless the note already answers the core questions: `what problem`, `why prior work is insufficient`, `what the method actually changes`, `how training / inference works`, `what evidence is strongest`, and `what the real limitation is`
 - even a triage note should let the user directly open the paper inside the note via an inline PDF embed when a local PDF exists
+- after a note batch is updated, refresh the auto-managed `库内同家族笔记` block so related notes stay connected
 
 ### 6. Extract key method and results visuals
 
@@ -220,6 +222,7 @@ Do not rely on memory for cleanup. The audit page is part of the method.
 - When the user asks to start a new field from the web, run the harvest step before asking for local PDFs.
 - Do not write canonical notes from harvest-only metadata when a reachable PDF could have been downloaded first.
 - A mature note should let the user explain the paper to another person in `2-3` minutes without reopening the PDF.
+- Use `method-*` and `task-*` tags consistently; the family-link refresher depends on them to connect notes at the end of each page.
 
 ## Read These References Only When Needed
 
@@ -227,3 +230,4 @@ Do not rely on memory for cleanup. The audit page is part of the method.
 - Read `references/web-harvest.md` when the task starts from web discovery instead of a local PDF pile.
 - Read `references/templates.md` for the canonical paper-note skeleton, track page template, and quality checklist.
 - Read `references/figure-cropping.md` when the task includes extracting method figures or results table crops from PDFs.
+- Use `scripts/refresh_note_family_links.py` after a batch rewrite or note import when the user wants every note to end with same-family note links.

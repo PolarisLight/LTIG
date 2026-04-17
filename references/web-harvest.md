@@ -95,11 +95,12 @@ The first pass should optimize for recall plus intelligible triage, not for pret
 1. Harvest from the web with `2-6` seed queries.
 2. Download reachable PDFs into the pending queue.
 3. Reuse existing notes or create triage notes with inline PDF embeds.
-4. Review `core` and `bridge` candidates.
-5. Refine the field boundary and track list.
-6. Scaffold the KB if needed.
-7. Promote only the important papers into canonical notes.
-8. Re-run harvest after boundary or query changes.
+4. Refresh end-of-note family links with `scripts/refresh_note_family_links.py`.
+5. Review `core` and `bridge` candidates.
+6. Refine the field boundary and track list.
+7. Scaffold the KB if needed.
+8. Promote only the important papers into canonical notes.
+9. Re-run harvest after boundary or query changes.
 
 ## Limits
 
