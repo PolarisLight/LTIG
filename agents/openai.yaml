@@ -1,0 +1,4 @@
+interface:
+  display_name: "Research KB Builder"
+  short_description: "Harvest web papers and build a layered research knowledge base in Obsidian."
+  default_prompt: "Use $research-knowledge-base-builder to harvest candidate papers from the web and scaffold or maintain a domain knowledge base in my Obsidian vault."
